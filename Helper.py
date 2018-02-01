@@ -11,6 +11,7 @@ import coluaco
 import paramiko
 from pathlib import Path
 
+# 开启debug模式
 debug = False
 
 exportTxtSignal = None
@@ -227,6 +228,7 @@ def getFromSvn(ver):
         exportTxt("开始搜寻最新的发布日志：")
         exportTxt("搜寻目录：" + dataVroot)
         maxResult = getMaxReleaseData(dataVroot)
+        print('maxResult')
         exportTxt("找到发布最新发布日志：")
         exportTxt("目录：" + maxResult)
         exportTxt("开始拉取配置表")
@@ -321,12 +323,15 @@ def getMaxReleaseData(dataVroot,level = 0):
                     pass
                 if debug:
                     exportTxt( "timeCur:" + repr(timeCur))
-                if timeCur != None and timeCur > timeMax:
+                    exportTxt("timeCur:" + repr(timeMax))
+                if timeCur != None and timeCur >= timeMax:
                     localTimeMax = timeCur
                     timeMax = timeCur
                     retPath = filepath[0:-1]
+                    print("retPath:" + retPath)
                     if debug:
                         exportTxt( "filepathMax:" + filepath)
+
                         exportTxt( "retPath:" + retPath)
 
     if retPath!=None:
